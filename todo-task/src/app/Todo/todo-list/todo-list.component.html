@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-10">
+      <h2></h2>
+    </div>
+    <div class="col-md-3">
+      <button type="button" (click)="addTask()" class="btn btn-primary right">Add Task</button>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered mt-4">
+    <thead>
+    <tr>
+      <th>Task Name</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of tasks; let i = index">
+      <td>
+        {{task.task}}
+      </td>
+      <td>
+        {{task.date | date : dateFormat}}
+      </td>
+      <td>
+        <div class="row">
+          <div class="col-md-6">
+            {{task.status}}
+          </div>
+          <div class="col-md-3">
+            <button type="button" (click)="onEdit(task)" class="btn btn-info right">Edit</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" (click)="onDel(task.id)" class="btn btn-danger right">Delete</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

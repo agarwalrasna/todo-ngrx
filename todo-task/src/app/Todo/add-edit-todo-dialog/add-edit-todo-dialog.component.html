@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Task Edit</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="exampleInputEmail1">Task</label>
+        <input type="text" class="form-control" formControlName="task" id="exampleInputEmail1" placeholder="Enter task">
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="dateOfTask">Date of Task</label>
+        <div class="input-group">
+          <input id="dateOfTask" class="form-control" formControlName="date" placeholder="Select Date" name="dp"
+                 ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="sel1">Status:</label>
+        <select formControlName="status" class="form-control form-select" id="sel1">
+          <option value="active" selected>Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modalRef.close()">Close</button>
+      <button type="submit" [disabled]="!editForm.valid" [ngClass]="editForm.valid ? 'btn btn-primary' : 'btn btn-info'">Confirm</button>
+    </div>
+  </form>
+</div>
