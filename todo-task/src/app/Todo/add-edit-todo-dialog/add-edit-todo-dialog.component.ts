@@ -25,7 +25,6 @@ export class AddEditTodoDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.modalData);
     this.task$.subscribe((data) => {
       this.task = JSON.parse(JSON.stringify(data));
     });
