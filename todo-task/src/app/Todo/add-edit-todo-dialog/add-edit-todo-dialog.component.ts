@@ -48,18 +48,7 @@ export class AddEditTodoDialogComponent implements OnInit {
   onSubmit(): any {
     if (this.modalData?.isUpdate) {
       const data = this.editForm.value;
-      for (const valueKey in this.editForm.value) {
-        if (this.editForm.value.hasOwnProperty(valueKey)) {
-          switch (valueKey) {
-            case 'date': {
-              if (this.editForm.value[valueKey]) {
-                data.date = Utility.formatDate(this.editForm.value[valueKey]);
-              }
-              break;
-            }
-          }
-        }
-      }
+      this.changeType(data);
       this.task.forEach((val) => {
         if (val.id === this.modalData.data.id) {
           val.date = data.date;
@@ -71,20 +60,24 @@ export class AddEditTodoDialogComponent implements OnInit {
       this.modalRef.close(true);
     } else {
       const data = this.editForm.value;
-      for (const valueKey in this.editForm.value) {
-        if (this.editForm.value.hasOwnProperty(valueKey)) {
-          switch (valueKey) {
-            case 'date': {
-              if (this.editForm.value[valueKey]) {
-                data.date = Utility.formatDate(this.editForm.value[valueKey]);
-              }
-              break;
+      this.changeType(data);
+      this.store.dispatch({type: ADD_TODO, payload: data});
+      this.modalRef.close();
+    }
+  }
+
+  changeType(data): any {
+    for (const valueKey in this.editForm.value) {
+      if (this.editForm.value.hasOwnProperty(valueKey)) {
+        switch (valueKey) {
+          case 'date': {
+            if (this.editForm.value[valueKey]) {
+              data.date = Utility.formatDate(this.editForm.value[valueKey]);
             }
+            break;
           }
         }
       }
-      this.store.dispatch({type: ADD_TODO, payload: data});
-      this.modalRef.close();
     }
   }
 }
