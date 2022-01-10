@@ -1,5 +1,6 @@
 import { NgbDateStruct, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+
 export class Utility {
   public static getDialogConfig(data?: any,
                                 size: 'sm' | 'lg' | 'xl' = 'sm',
@@ -28,6 +29,7 @@ export class Utility {
     }
     return config;
   }
+
   public static toNgbDateStruct(date): NgbDateStruct {
     const newDate = new Date(date);
     return {
@@ -36,6 +38,7 @@ export class Utility {
       year: newDate.getFullYear(),
     };
   }
+
   public static formatDate(date, hours?, minutes?, seconds?): string {
     const currentDate = moment();
     currentDate.set('year', date.year);

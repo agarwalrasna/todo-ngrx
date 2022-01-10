@@ -8,9 +8,9 @@ describe('AddEditTodoDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEditTodoDialogComponent ]
+      declarations: [AddEditTodoDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -55,10 +55,10 @@ export class TodoListComponent implements OnInit {
   }
 
   onDel(id: string): void {
-    this.modalService.show(ConfirmationDailogComponent, Utility.getDialogConfig(null, 'lg', false, false))
+    this.modalService.show(ConfirmationDailogComponent, Utility.getDialogConfig(null, 'sm', false, false))
       .subscribe((result) => {
         if (result && !result.dismissed) {
-          this.store.dispatch({type: DELETE_TODO , payload: id});
+          this.store.dispatch({type: DELETE_TODO, payload: id});
           this.store.dispatch({type: GET_TODOS});
         }
       });

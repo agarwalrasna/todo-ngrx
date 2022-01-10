@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { MODAL_DATA } from '../service/modal.service';
 import { Utility } from '../../utility';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { ADD_TODO, UPDATE_TODO } from '../../store/todo.reducer';
@@ -13,19 +13,20 @@ import { ADD_TODO, UPDATE_TODO } from '../../store/todo.reducer';
   templateUrl: './add-edit-todo-dialog.component.html',
   styleUrls: ['./add-edit-todo-dialog.component.css']
 })
-export class AddEditTodoDialogComponent implements OnInit {
+export class AddEditTodoDialogComponent implements OnInit, OnDestroy {
   editForm;
   public task$: Observable<any> = this.store.pipe()
     .pipe(map(state => state.todos.todo)
     );
   public task: any[] = [];
+  public unSub: Subscription;
 
   constructor(public modalRef: NgbActiveModal, @Inject(MODAL_DATA) private readonly modalData,
               private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
-    this.task$.subscribe((data) => {
+    this.unSub = this.task$.subscribe((data) => {
       this.task = JSON.parse(JSON.stringify(data));
     });
     if (this.modalData?.isUpdate) {
@@ -43,6 +44,10 @@ export class AddEditTodoDialogComponent implements OnInit {
         status: new FormControl('', Validators.required)
       });
     }
+  }
+
+  ngOnDestroy(): any {
+    this.unSub.unsubscribe();
   }
 
   onSubmit(): any {

@@ -8,9 +8,9 @@ describe('ConfirmationDailogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationDailogComponent ]
+      declarations: [ConfirmationDailogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
